@@ -1,0 +1,26 @@
+unit UTimeFutebol;
+
+interface
+
+type
+
+TTimeFutebol = class
+
+
+private
+
+
+
+protected
+
+
+
+public
+
+
+
+end;
+
+implementation
+
+end.

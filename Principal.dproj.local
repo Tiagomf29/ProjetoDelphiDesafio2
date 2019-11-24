@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/10/28 21:19:08.000.653,=C:\Users\Tiago\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/10/28 21:36:47.000.821,=C:\Users\Tiago\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/11/05 22:07:53.000.569,=C:\Users\Tiago\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/11/23 15:16:41.000.048,=C:\Users\Tiago\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/11/23 15:22:14.000.133,C:\Users\Tiago\Documents\RAD Studio\Projects\Unit1.dfm=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\UPrincipal.dfm</Transaction>
+    <Transaction>2019/11/23 15:22:14.000.133,C:\Users\Tiago\Documents\RAD Studio\Projects\Unit1.pas=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\UPrincipal.pas</Transaction>
+    <Transaction>2019/11/23 15:22:25.000.142,C:\Users\Tiago\Documents\RAD Studio\Projects\Project1.dproj=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\Principal.dproj</Transaction>
+    <Transaction>2019/11/23 16:39:05.000.917,=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\Unit1.pas</Transaction>
+    <Transaction>2019/11/23 16:39:57.000.373,C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\UTimeFutebol.pas=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\Unit1.pas</Transaction>
+    <Transaction>2019/11/23 17:49:38.000.043,=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\Unit1.pas</Transaction>
+    <Transaction>2019/11/23 17:53:57.000.192,C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\Unit1.pas=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\UCampeonato.pas</Transaction>
+    <Transaction>2019/11/24 00:24:25.000.213,=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\Unit2.pas</Transaction>
+    <Transaction>2019/11/24 00:28:51.000.299,C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\Unit2.dfm=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\UFrmCampeonatos.dfm</Transaction>
+    <Transaction>2019/11/24 00:28:51.000.299,C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\Unit2.pas=C:\Tiago\Desenvolvimento\Projetos Git\ProjetoDesafioFutebol\UFrmCampeonatos.pas</Transaction>
+  </Transactions>
+</BorlandProject>

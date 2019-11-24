@@ -1,0 +1,29 @@
+unit UTimeFutebol;
+
+interface
+
+type
+
+TTimeFutebol = class
+
+
+private
+
+FId                : Integer;
+FNome              : String;
+FQuantidadeTorcida : double;
+
+
+protected
+
+
+
+public
+
+
+
+end;
+
+implementation
+
+end.

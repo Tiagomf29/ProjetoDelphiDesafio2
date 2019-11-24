@@ -1,0 +1,75 @@
+unit UCampeonato;
+
+interface
+
+type
+
+TCampeonatos = class
+
+private
+
+  FId : Integer;
+  FNome : String;
+  FAno  : Smallint;
+  function getAno: Smallint;
+  function getId: Integer;
+  function getNome: String;
+  procedure setAno(const Value: Smallint);
+  procedure setId(const Value: Integer);
+  procedure setNome(const Value: String);
+
+protected
+
+
+public
+
+property id : Integer read getId write setId;
+property nome : String read getNome write setNome;
+property ano  : Smallint read getAno write setAno;
+
+procedure copyFromObject(campeonato : TCampeonatos);
+
+end;
+
+implementation
+
+{ TCampeonatos }
+
+procedure TCampeonatos.copyFromObject(campeonato: TCampeonatos);
+begin
+  campeonato.id   := Self.FId;
+  campeonato.nome := Self.FNome;
+  campeonato.ano  := Self.FAno;
+end;
+
+function TCampeonatos.getAno: Smallint;
+begin
+  Result:= FAno;
+end;
+
+function TCampeonatos.getId: Integer;
+begin
+  Result:= FId;
+end;
+
+function TCampeonatos.getNome: String;
+begin
+  Result:= FNome;
+end;
+
+procedure TCampeonatos.setAno(const Value: Smallint);
+begin
+  Self.FAno:= Value;
+end;
+
+procedure TCampeonatos.setId(const Value: Integer);
+begin
+  Self.FId:= Value;
+end;
+
+procedure TCampeonatos.setNome(const Value: String);
+begin
+  Self.FNome:= Value;
+end;
+
+end.
