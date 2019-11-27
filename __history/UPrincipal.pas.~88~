@@ -212,9 +212,6 @@ begin
 
     CDS_FUTEBOL.Post;
 
-    CDS_TITULOS.Close;
-    CDS_TITULOS.CreateDataSet;
-
     valorSelecionado:= CDS_FUTEBOLID.Value;
     CDS_FUTEBOL.First;
     ModoBotaoNaoInsercao;

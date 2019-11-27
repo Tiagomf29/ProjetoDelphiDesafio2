@@ -83,7 +83,7 @@
 				<MainSource>MainSource</MainSource>
 			</DelphiCompile>
 			<DCCReference Include="UPrincipal.pas">
-				<Form>Form1</Form>
+				<Form>frmCadastroTimeFutebol</Form>
 				<FormType>dfm</FormType>
 			</DCCReference>
 			<DCCReference Include="UTimeFutebol.pas"/>

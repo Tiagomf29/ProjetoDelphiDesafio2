@@ -2,7 +2,7 @@ program Principal;
 
 uses
   Vcl.Forms,
-  UPrincipal in 'UPrincipal.pas' {frmCadastroTimeFutebol},
+  UPrincipal in 'UPrincipal.pas' {Form1},
   UTimeFutebol in 'UTimeFutebol.pas',
   UCampeonato in 'UCampeonato.pas',
   UFrmCampeonatos in 'UFrmCampeonatos.pas' {frmCadastroCampeonatos};
@@ -12,7 +12,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TfrmCadastroTimeFutebol, frmCadastroTimeFutebol);
+  Application.CreateForm(TForm1, Form1);
   Application.CreateForm(TfrmCadastroCampeonatos, frmCadastroCampeonatos);
   Application.Run;
 end.

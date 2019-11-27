@@ -163,7 +163,7 @@ var
 timeFutebol : TTimeFutebol;
 cp : TCampeonatos;
 lListaCampeonatos : TObjectList<TCampeonatos>;
-i,valorSelecionado : Integer;
+i : Integer;
 
 begin
 
@@ -211,11 +211,6 @@ begin
     CDS_FUTEBOL.FieldByName('Quantidade_Torcida').AsFloat:= timeFutebol.quantidadeTorcida;
 
     CDS_FUTEBOL.Post;
-
-    CDS_TITULOS.Close;
-    CDS_TITULOS.CreateDataSet;
-
-    valorSelecionado:= CDS_FUTEBOLID.Value;
     CDS_FUTEBOL.First;
     ModoBotaoNaoInsercao;
 
@@ -224,13 +219,13 @@ begin
       ListaTimesCadastrados.Add(timeFutebol);
     end else
     begin
+      CDS_FUTEBOL.First;
       for i := 0 to ListaTimesCadastrados.Count-1 do
       begin
-        if valorSelecionado = ListaTimesCadastrados.Items[i].id then
+        if CDS_FUTEBOLID.Value = ListaTimesCadastrados.Items[i].id then
         begin
            timeFutebol.id := ListaTimesCadastrados.Items[i].id;
            ListaTimesCadastrados.Delete(i);
-           break;
         end;
       end;
         ListaTimesCadastrados.Add(timeFutebol);

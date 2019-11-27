@@ -1,4 +1,4 @@
-object Form1: TForm1
+object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
   Left = 0
   Top = 0
   Caption = 'Cadastro de times de futebol'
@@ -10,7 +10,7 @@ object Form1: TForm1
   Font.Height = -11
   Font.Name = 'Tahoma'
   Font.Style = []
-  Menu = MainMenu1
+  Menu = MainMenu
   OldCreateOrder = False
   Position = poDesktopCenter
   OnCreate = FormCreate
@@ -108,7 +108,7 @@ object Form1: TForm1
     OnCellClick = DBGrid1CellClick
   end
   object btSalvar: TButton
-    Left = 129
+    Left = 89
     Top = 119
     Width = 75
     Height = 25
@@ -117,7 +117,7 @@ object Form1: TForm1
     OnClick = btSalvarClick
   end
   object btnExcluir: TButton
-    Left = 291
+    Left = 326
     Top = 119
     Width = 75
     Height = 25
@@ -153,7 +153,7 @@ object Form1: TForm1
     OnClick = btnQtdeCampCadastradosTimeClick
   end
   object btnNovo: TButton
-    Left = 48
+    Left = 8
     Top = 119
     Width = 75
     Height = 25
@@ -162,13 +162,22 @@ object Form1: TForm1
     OnClick = btnNovoClick
   end
   object btnCancelar: TButton
-    Left = 210
+    Left = 245
     Top = 119
     Width = 75
     Height = 25
     Caption = 'Cancelar'
     TabOrder = 9
     OnClick = btnCancelarClick
+  end
+  object btnAlterar: TButton
+    Left = 167
+    Top = 119
+    Width = 75
+    Height = 25
+    Caption = 'Alterar'
+    TabOrder = 10
+    OnClick = btnAlterarClick
   end
   object DS_TITULOS: TDataSource
     DataSet = CDS_TITULOS
@@ -214,7 +223,7 @@ object Form1: TForm1
       FieldName = 'Quantidade_Torcida'
     end
   end
-  object MainMenu1: TMainMenu
+  object MainMenu: TMainMenu
     Left = 280
     Top = 48
     object Cadastro1: TMenuItem

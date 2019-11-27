@@ -9,7 +9,7 @@ uses
   Vcl.Menus, UCampeonato;
 
 type
-  TForm1 = class(TForm)
+  TfrmCadastroTimeFutebol = class(TForm)
     GroupBox1: TGroupBox;
     GroupBox2: TGroupBox;
     DBGrid1: TDBGrid;
@@ -33,12 +33,14 @@ type
     btnQtdeCampeonatosCadastrados: TButton;
     btnQtdeCampCadastradosTime: TButton;
     CDS_TITULOSAno: TSmallintField;
-    MainMenu1: TMainMenu;
+    MainMenu: TMainMenu;
     Cadastro1: TMenuItem;
     Campeonatos1: TMenuItem;
     btnCadastrarTitulos: TButton;
     ComboBox1: TComboBox;
     btnNovo: TButton;
+    btnCancelar: TButton;
+    btnAlterar: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btSalvarClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
@@ -50,9 +52,12 @@ type
     procedure btnNovoClick(Sender: TObject);
     procedure btnQtdeCampeonatosCadastradosClick(Sender: TObject);
     procedure btnQtdeCampCadastradosTimeClick(Sender: TObject);
+    procedure btnCancelarClick(Sender: TObject);
+    procedure btnAlterarClick(Sender: TObject);
   private
     valorSeqencial : Integer;
     listaCampeonatos : TObjectList<TCampeonatos>;
+    statusBotaoAlterar : boolean;
     procedure ModoBotaoInsercao();
     procedure ModoBotaoNaoInsercao();
     { Private declarations }
@@ -62,7 +67,7 @@ type
   end;
 
 var
-  Form1: TForm1;
+  frmCadastroTimeFutebol: TfrmCadastroTimeFutebol;
 
 implementation
 
@@ -70,20 +75,32 @@ implementation
 
 uses UFrmCampeonatos;
 
-procedure TForm1.btnCadastrarTitulosClick(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.btnAlterarClick(Sender: TObject);
 begin
-   CDS_TITULOS.Append;
-   CDS_TITULOS.FieldByName('ID').AsInteger:=  listaCampeonatos.Items[ComboBox1.ItemIndex].id;
-   CDS_TITULOS.FieldByName('nome').AsString:= listaCampeonatos.Items[ComboBox1.ItemIndex].nome;
-   CDS_TITULOS.FieldByName('ano').AsInteger:= listaCampeonatos.Items[ComboBox1.ItemIndex].ano;
-   CDS_TITULOS.Post;
-   
-end;                                                                            
+  ModoBotaoInsercao;
+  statusBotaoAlterar:= true;
+end;
 
-procedure TForm1.btnExcluirClick(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.btnCadastrarTitulosClick(Sender: TObject);
+begin
+  CDS_TITULOS.Append;
+  CDS_TITULOS.FieldByName('ID').AsInteger:=  listaCampeonatos.Items[ComboBox1.ItemIndex].id;
+  CDS_TITULOS.FieldByName('nome').AsString:= listaCampeonatos.Items[ComboBox1.ItemIndex].nome;
+  CDS_TITULOS.FieldByName('ano').AsInteger:= listaCampeonatos.Items[ComboBox1.ItemIndex].ano;
+  CDS_TITULOS.Post;
+end;
+
+procedure TfrmCadastroTimeFutebol.btnCancelarClick(Sender: TObject);
+begin
+  ModoBotaoNaoInsercao;
+  statusBotaoAlterar:= false;
+end;
+
+procedure TfrmCadastroTimeFutebol.btnExcluirClick(Sender: TObject);
 var
 i : Integer;
 begin
+  statusBotaoAlterar:= false;
   if CDS_FUTEBOLID.Value = 0 then
   begin
     ShowMessage('Selecione um time para ser excluído');
@@ -101,21 +118,21 @@ begin
       CDS_FUTEBOL.Delete;
       CDS_TITULOS.Close;
       CDS_TITULOS.CreateDataSet;
-      edtNome.Enabled:=false;
-      edtQtdeTorcida.Enabled:=false;
+      ModoBotaoNaoInsercao;
   end;
 end;
 
-procedure TForm1.btnNovoClick(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.btnNovoClick(Sender: TObject);
 begin
   CDS_TITULOS.Close;
   CDS_TITULOS.CreateDataSet;
-  edtNome.Enabled:=True;
-  edtQtdeTorcida.Enabled:=True;
-  edtNome.SetFocus;
+  ModoBotaoInsercao;
+  edtNome.Text:='';
+  edtQtdeTorcida.Text:='';
+  statusBotaoAlterar:= False;
 end;
 
-procedure TForm1.btnQtdeCampCadastradosTimeClick(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.btnQtdeCampCadastradosTimeClick(Sender: TObject);
 var
 i : Integer;
 begin
@@ -124,31 +141,31 @@ begin
       for I := 0 to ListaTimesCadastrados.Count-1 do
       begin
         if (CDS_FUTEBOLID.Value = ListaTimesCadastrados.Items[i].id) then
-         ShowMessage('A quantidade de título do time '+ ListaTimesCadastrados.Items[i].nome + ' é de '+ IntToStr(ListaTimesCadastrados.Items[i].titulos.Count));
+         ShowMessage('O time de futebol '+ ListaTimesCadastrados.Items[i].nome + ' possui '+ IntToStr(ListaTimesCadastrados.Items[i].titulos.Count)+' títulos.');
       end;
     end
     else
       MessageDlg('Favor selecionar um time de futebol para a realização da busca de quantidade de títulos',mtInformation,[mbOK],0);
 end;
 
-procedure TForm1.btnQtdeCampeonatosCadastradosClick(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.btnQtdeCampeonatosCadastradosClick(Sender: TObject);
 begin
     MessageDlg('Existem '+ IntToStr(frmCadastroCampeonatos.listaCampeonatos.Count)+' campeonatos cadastrados.',mtInformation,[mbOK],0);
 end;
 
-procedure TForm1.btnQtdeTimesCadastradosClick(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.btnQtdeTimesCadastradosClick(Sender: TObject);
 begin
   MessageDlg('Existem '+ IntToStr(ListaTimesCadastrados.Count) + ' times de futebol cadastrados.',mtInformation,[mbOK],0);
 end;
 
-procedure TForm1.btSalvarClick(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.btSalvarClick(Sender: TObject);
 var
 timeFutebol : TTimeFutebol;
 cp : TCampeonatos;
 lListaCampeonatos : TObjectList<TCampeonatos>;
 
 begin
-
+  statusBotaoAlterar:= false;
   if edtNome.Text = '' then
   begin
     MessageDlg('Nome não informado. Verifique!',mtInformation,[mbOK],0);
@@ -156,56 +173,57 @@ begin
   end
   else
   begin
+    timeFutebol:= TTimeFutebol.Create;
 
-      timeFutebol:= TTimeFutebol.Create;
-      
-        valorSeqencial:= valorSeqencial+1;
-        timeFutebol.id:=valorSeqencial;
-        timeFutebol.nome:= edtNome.Text;
-        timeFutebol.quantidadeTorcida:= StrToInt(edtQtdeTorcida.Text);
-                  
-           lListaCampeonatos := TObjectList<TCampeonatos>.Create;
-                    
-           CDS_TITULOS.First;
-           while not CDS_TITULOS.Eof do
-           begin
-             
-             cp := TCampeonatos.Create;
+    valorSeqencial:= valorSeqencial+1;
+    timeFutebol.id:=valorSeqencial;
+    timeFutebol.nome:= edtNome.Text;
+    timeFutebol.quantidadeTorcida:= StrToInt(edtQtdeTorcida.Text);
 
-             cp.id := CDS_TITULOS.FieldByName('id').AsInteger;
-             cp.nome :=CDS_TITULOS.FieldByName('nome').AsString;
-             cp.ano := CDS_TITULOS.FieldByName('ano').AsInteger;
+    lListaCampeonatos := TObjectList<TCampeonatos>.Create;
 
-             lListaCampeonatos.Add( cp);
+    CDS_TITULOS.First;
+    while not CDS_TITULOS.Eof do
+    begin
+      cp := TCampeonatos.Create;
 
-             CDS_TITULOS.Next;    
-             
-           end;
+      cp.id := CDS_TITULOS.FieldByName('id').AsInteger;
+      cp.nome :=CDS_TITULOS.FieldByName('nome').AsString;
+      cp.ano := CDS_TITULOS.FieldByName('ano').AsInteger;
 
-           timeFutebol.titulos:= lListaCampeonatos;
-      
-           CDS_FUTEBOL.Append;
-    
-           CDS_FUTEBOL.FieldByName('id').AsInteger:= timeFutebol.id;
-           CDS_FUTEBOL.FieldByName('nome').AsString := timeFutebol.nome;
-           CDS_FUTEBOL.FieldByName('Quantidade_Torcida').AsFloat:= timeFutebol.quantidadeTorcida;
+      lListaCampeonatos.Add(cp);
 
-           CDS_FUTEBOL.Post;
-           CDS_FUTEBOL.First;
-           edtNome.Text:='';
-           edtQtdeTorcida.Text:='';
-           edtNome.Enabled:=false;
-           edtQtdeTorcida.Enabled:=false;
+      CDS_TITULOS.Next;
 
-           ListaTimesCadastrados.Add(timeFutebol);        
-      
-  end;  
+    end;
+
+    timeFutebol.titulos:= lListaCampeonatos;
+
+    if  statusBotaoAlterar then
+    begin
+      CDS_FUTEBOL.Edit;
+    end else
+      CDS_FUTEBOL.Append;
+
+
+    CDS_FUTEBOL.FieldByName('id').AsInteger:= timeFutebol.id;
+    CDS_FUTEBOL.FieldByName('nome').AsString := timeFutebol.nome;
+    CDS_FUTEBOL.FieldByName('Quantidade_Torcida').AsFloat:= timeFutebol.quantidadeTorcida;
+
+    CDS_FUTEBOL.Post;
+    CDS_FUTEBOL.First;
+    ModoBotaoNaoInsercao;
+
+    ListaTimesCadastrados.Add(timeFutebol);
+
+  end;
 end;
 
-procedure TForm1.Campeonatos1Click(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.Campeonatos1Click(Sender: TObject);
 var
 i : Integer;
 begin
+
   frmcadastroCampeonatos.ShowModal;
   listaCampeonatos := frmCadastroCampeonatos.listaCampeonatos;
 
@@ -214,80 +232,84 @@ begin
   for i := 0 to listaCampeonatos.Count-1 do
   begin
     ComboBox1.Items.AddObject(listaCampeonatos.Items[i].nome +'-' +IntToStr(listaCampeonatos.Items[i].ano),
-     TObject(listaCampeonatos));    
+      TObject(listaCampeonatos));
   end;    
 end;
 
-procedure TForm1.DBGrid1CellClick(Column: TColumn);
+procedure TfrmCadastroTimeFutebol.DBGrid1CellClick(Column: TColumn);
 var
 i,j :Integer;
 lista : TObjectList<TCampeonatos>;
 begin
-    edtNome.Text:= CDS_FUTEBOLNome.Value;
-    edtQtdeTorcida.Text := IntToStr(CDS_FUTEBOLQuantidade_Torcida.Value);
 
-    CDS_TITULOS.Close;
-    CDS_TITULOS.CreateDataSet;
+  ModoBotaoNaoInsercao;
+  edtNome.Text:= CDS_FUTEBOLNome.Value;
+  edtQtdeTorcida.Text := IntToStr(CDS_FUTEBOLQuantidade_Torcida.Value);
 
-    
-    lista:= TObjectList<TCampeonatos>.Create;
-   
-      for I := 0 to ListaTimesCadastrados.Count-1 do
-        begin
-            if(CDS_FUTEBOLID.Value = ListaTimesCadastrados.Items[i].id)then
-            begin
-                                                                
-              CDS_TITULOS.Close;
-              CDS_TITULOS.CreateDataSet;
+  CDS_TITULOS.Close;
+  CDS_TITULOS.CreateDataSet;
 
-              lista:= ListaTimesCadastrados.Items[i].titulos;
+  lista:= TObjectList<TCampeonatos>.Create;
 
-                for j := 0 to lista.Count-1 do
-                begin
-                  CDS_TITULOS.Append;
-                  CDS_TITULOS.FieldByName('id').AsInteger:= lista.Items[j].id;
-                  CDS_TITULOS.FieldByName('nome').AsString:=lista.Items[j].nome;
-                  CDS_TITULOS.FieldByName('ano').AsInteger:= lista.Items[j].ano;
-                  CDS_TITULOS.Post;
-                end;                                                  
-            end;
-        end;
-   
-      
+  for I := 0 to ListaTimesCadastrados.Count-1 do
+  begin
+
+    if(CDS_FUTEBOLID.Value = ListaTimesCadastrados.Items[i].id)then
+    begin
+      CDS_TITULOS.Close;
+      CDS_TITULOS.CreateDataSet;
+
+      lista:= ListaTimesCadastrados.Items[i].titulos;
+
+      for j := 0 to lista.Count-1 do
+      begin
+        CDS_TITULOS.Append;
+        CDS_TITULOS.FieldByName('id').AsInteger:= lista.Items[j].id;
+        CDS_TITULOS.FieldByName('nome').AsString:=lista.Items[j].nome;
+        CDS_TITULOS.FieldByName('ano').AsInteger:= lista.Items[j].ano;
+        CDS_TITULOS.Post;
+      end;
+    end;
+  end;
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.FormCreate(Sender: TObject);
 
 begin
   CDS_TITULOS.CreateDataSet;
   CDS_FUTEBOL.CreateDataSet;
   ListaTimesCadastrados := TObjectList<TTimeFutebol>.Create;
+  ModoBotaoNaoInsercao;
 end;
 
-procedure TForm1.FormDestroy(Sender: TObject);
+procedure TfrmCadastroTimeFutebol.FormDestroy(Sender: TObject);
 begin
   FreeAndNil(ListaTimesCadastrados);
 end;
 
-procedure TForm1.ModoBotaoInsercao;
+procedure TfrmCadastroTimeFutebol.ModoBotaoInsercao;
 begin
   edtNome.Enabled:= true;
-  edtNome.Text:='';
-  edtQtdeTorcida.Text:='';
   edtQtdeTorcida.Enabled:=True;
   btnNovo.Enabled:=false;
   btSalvar.Enabled:=True;
+  btnAlterar.Enabled:=false;
   btnExcluir.Enabled:=false;
+  btnCancelar.Enabled:= True;
+  btnCadastrarTitulos.Enabled:=True;
   edtNome.SetFocus;
 end;
 
-procedure TForm1.ModoBotaoNaoInsercao;
+procedure TfrmCadastroTimeFutebol.ModoBotaoNaoInsercao;
 begin
   edtNome.Enabled:= false;
   edtQtdeTorcida.Enabled:=false;
   btnNovo.Enabled:=true;
   btSalvar.Enabled:=false;
+  btnAlterar.Enabled:=true;
   btnExcluir.Enabled:=true;
+  btnCancelar.Enabled:=false;
+  btnCadastrarTitulos.Enabled:=False;
 end;
 
 end.

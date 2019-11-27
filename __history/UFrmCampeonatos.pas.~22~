@@ -63,6 +63,7 @@ begin
   else
   begin
 
+  try
     variavelSequencial:= variavelSequencial+1;
 
     campeonato:= TCampeonatos.Create;
@@ -82,6 +83,9 @@ begin
     CDS.First;
 
     listaCampeonatos.Add(campeonato);
+  finally
+
+  end;
 
   end;
 end;

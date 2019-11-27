@@ -39,9 +39,10 @@ object Form1: TForm1
     end
     object edtNome: TEdit
       Left = 3
-      Top = 22
+      Top = 24
       Width = 121
       Height = 21
+      Enabled = False
       TabOrder = 0
     end
     object edtQtdeTorcida: TEdit
@@ -49,6 +50,7 @@ object Form1: TForm1
       Top = 66
       Width = 121
       Height = 21
+      Enabled = False
       TabOrder = 1
     end
   end
@@ -106,7 +108,7 @@ object Form1: TForm1
     OnCellClick = DBGrid1CellClick
   end
   object btSalvar: TButton
-    Left = 168
+    Left = 129
     Top = 119
     Width = 75
     Height = 25
@@ -115,7 +117,7 @@ object Form1: TForm1
     OnClick = btSalvarClick
   end
   object btnExcluir: TButton
-    Left = 249
+    Left = 291
     Top = 119
     Width = 75
     Height = 25
@@ -148,15 +150,25 @@ object Form1: TForm1
     Height = 25
     Caption = 'Quantidade de campeonatos cadastrados por time'
     TabOrder = 7
+    OnClick = btnQtdeCampCadastradosTimeClick
   end
   object btnNovo: TButton
-    Left = 87
+    Left = 48
     Top = 119
     Width = 75
     Height = 25
     Caption = 'Novo'
     TabOrder = 8
     OnClick = btnNovoClick
+  end
+  object btnCancelar: TButton
+    Left = 210
+    Top = 119
+    Width = 75
+    Height = 25
+    Caption = 'Cancelar'
+    TabOrder = 9
+    OnClick = btnCancelarClick
   end
   object DS_TITULOS: TDataSource
     DataSet = CDS_TITULOS
@@ -203,8 +215,8 @@ object Form1: TForm1
     end
   end
   object MainMenu1: TMainMenu
-    Left = 80
-    Top = 128
+    Left = 280
+    Top = 48
     object Cadastro1: TMenuItem
       Caption = 'Cadastro'
       object Campeonatos1: TMenuItem

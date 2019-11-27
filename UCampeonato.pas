@@ -11,6 +11,7 @@ private
   FId : Integer;
   FNome : String;
   FAno  : Smallint;
+
   function getAno: Smallint;
   function getId: Integer;
   function getNome: String;
