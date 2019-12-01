@@ -1,0 +1,74 @@
+unit UListaTimes;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Grids, Vcl.DBGrids, Data.DB,
+  Datasnap.DBClient, Vcl.StdCtrls, Uprincipal, UTimeFutebol,UCampeonato, System.Generics.Collections;
+
+type
+  TfrmListaTimes = class(TForm)
+    DBGrid1: TDBGrid;
+    DS: TDataSource;
+    CDS: TClientDataSet;
+    CDSID: TIntegerField;
+    CDSNome: TStringField;
+    CDSQtdeTorcida: TIntegerField;
+    Button1: TButton;
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    ListaCadastroFutebol : TObjectList<TTimeFutebol>;
+  end;
+
+var
+  frmListaTimes: TfrmListaTimes;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmListaTimes.Button1Click(Sender: TObject);
+begin
+  Close;
+end;
+
+procedure TfrmListaTimes.FormCreate(Sender: TObject);
+begin
+   cds.CreateDataSet;
+end;
+
+procedure TfrmListaTimes.FormShow(Sender: TObject);
+var
+i: integer;
+cadastroFutebol :TTimeFutebol;
+begin
+
+
+  ListaCadastroFutebol:= TObjectList<TTimeFutebol>.Create;
+  ListaCadastroFutebol.Clear;
+  CDS.Close;
+  CDS.CreateDataSet;
+
+  for i:=0 to frmCadastroTimeFutebol.ListaTimesCadastrados.Count-1 do
+  begin
+
+    cadastroFutebol:= TTimeFutebol.Create;
+    cadastroFutebol.CopyFromObejct(frmCadastroTimeFutebol.ListaTimesCadastrados.Items[i]);
+
+    CDS.Append;
+    CDS.FieldByName('ID').AsInteger:= cadastroFutebol.id;
+    CDS.FieldByName('Nome').AsString:= cadastroFutebol.nome;
+    CDS.FieldByName('qtdeTorcida').AsFloat:= cadastroFutebol.quantidadeTorcida;
+    CDS.Post;
+
+    ListaCadastroFutebol.Add(cadastroFutebol);
+
+  end;
+end;
+
+end.

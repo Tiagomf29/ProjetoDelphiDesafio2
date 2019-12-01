@@ -38,9 +38,9 @@ implementation
 
 procedure TCampeonatos.copyFromObject(campeonato: TCampeonatos);
 begin
-  campeonato.id   := Self.FId;
-  campeonato.nome := Self.FNome;
-  campeonato.ano  := Self.FAno;
+  Self.FId := campeonato.id;
+  Self.FNome := campeonato.nome;
+  Self.FAno :=campeonato.ano;
 end;
 
 function TCampeonatos.getAno: Smallint;

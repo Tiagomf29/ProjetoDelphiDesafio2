@@ -1,0 +1,18 @@
+program Principal;
+
+uses
+  Vcl.Forms,
+  UPrincipal in 'UPrincipal.pas' {frmCadastroTimeFutebol},
+  UTimeFutebol in 'UTimeFutebol.pas',
+  UCampeonato in 'UCampeonato.pas',
+  UFrmCampeonatos in 'UFrmCampeonatos.pas' {frmCadastroCampeonatos};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TfrmCadastroTimeFutebol, frmCadastroTimeFutebol);
+  Application.CreateForm(TfrmCadastroCampeonatos, frmCadastroCampeonatos);
+  Application.Run;
+end.

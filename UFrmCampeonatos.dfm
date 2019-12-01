@@ -1,7 +1,7 @@
 object frmCadastroCampeonatos: TfrmCadastroCampeonatos
   Left = 0
   Top = 0
-  Caption = 'Cadastro de campoeonatos'
+  Caption = 'Cadastro de campeonatos'
   ClientHeight = 317
   ClientWidth = 447
   Color = clBtnFace
@@ -14,6 +14,7 @@ object frmCadastroCampeonatos: TfrmCadastroCampeonatos
   Position = poDesktopCenter
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Nome: TLabel

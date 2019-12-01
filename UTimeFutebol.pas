@@ -34,11 +34,21 @@ public
   property quantidadeTorcida : double read getQuantidadeTorcida write setQuantidadeTorcida;
   property titulos           : TObjectList<TCampeonatos> read getTitulos write setTitulos;
 
+  procedure CopyFromObejct(timeFutebol :TTimeFutebol);
+
 end;
 
 implementation
 
 { TTimeFutebol }
+
+procedure TTimeFutebol.CopyFromObejct(timeFutebol: TTimeFutebol);
+begin
+  Self.FId                  := timeFutebol.id;
+  Self.FNome                := timeFutebol.nome;
+  Self.quantidadeTorcida    := timeFutebol.quantidadeTorcida;
+  Self.FTitulos             := timeFutebol.titulos;
+end;
 
 function TTimeFutebol.getId: Integer;
 begin

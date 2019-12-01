@@ -3,7 +3,7 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
   Top = 0
   Caption = 'Cadastro de times de futebol'
   ClientHeight = 464
-  ClientWidth = 766
+  ClientWidth = 837
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -57,16 +57,17 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
   object GroupBox2: TGroupBox
     Left = 415
     Top = 1
-    Width = 346
-    Height = 236
+    Width = 418
+    Height = 232
     Caption = 'T'#237'tulos'
     TabOrder = 1
     object DBGrid2: TDBGrid
       Left = 0
       Top = 14
-      Width = 343
+      Width = 326
       Height = 185
       DataSource = DS_TITULOS
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
@@ -79,11 +80,11 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
       Top = 204
       Width = 110
       Height = 25
-      Caption = 'Incluir T'#237'tulos'
+      Caption = 'Incluir t'#237'tulos'
       TabOrder = 1
       OnClick = btnCadastrarTitulosClick
     end
-    object ComboBox1: TComboBox
+    object cbxIncluirTitulos: TComboBox
       Left = 143
       Top = 207
       Width = 172
@@ -91,15 +92,24 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
       Style = csOwnerDrawFixed
       TabOrder = 2
     end
+    object btnExcluirTitulo: TButton
+      Left = 330
+      Top = 73
+      Width = 82
+      Height = 59
+      Caption = 'Excluir t'#237'tulo'
+      TabOrder = 3
+      OnClick = btnExcluirTituloClick
+    end
   end
   object DBGrid1: TDBGrid
     Left = 0
-    Top = 236
-    Width = 761
-    Height = 229
+    Top = 233
+    Width = 833
+    Height = 228
     DataSource = DS_FUTEBOL
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
-    TabOrder = 2
+    TabOrder = 7
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -108,7 +118,7 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
     OnCellClick = DBGrid1CellClick
   end
   object btSalvar: TButton
-    Left = 89
+    Left = 88
     Top = 119
     Width = 75
     Height = 25
@@ -122,7 +132,7 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
     Width = 75
     Height = 25
     Caption = 'Excluir'
-    TabOrder = 4
+    TabOrder = 6
     OnClick = btnExcluirClick
   end
   object btnQtdeTimesCadastrados: TButton
@@ -131,7 +141,7 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
     Width = 393
     Height = 25
     Caption = 'Quantidade de times cadastrados'
-    TabOrder = 5
+    TabOrder = 8
     OnClick = btnQtdeTimesCadastradosClick
   end
   object btnQtdeCampeonatosCadastrados: TButton
@@ -140,7 +150,7 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
     Width = 393
     Height = 25
     Caption = 'Quantidade de campeonatos cadastrados'
-    TabOrder = 6
+    TabOrder = 9
     OnClick = btnQtdeCampeonatosCadastradosClick
   end
   object btnQtdeCampCadastradosTime: TButton
@@ -149,7 +159,7 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
     Width = 393
     Height = 25
     Caption = 'Quantidade de campeonatos cadastrados por time'
-    TabOrder = 7
+    TabOrder = 10
     OnClick = btnQtdeCampCadastradosTimeClick
   end
   object btnNovo: TButton
@@ -158,16 +168,16 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
     Width = 75
     Height = 25
     Caption = 'Novo'
-    TabOrder = 8
+    TabOrder = 2
     OnClick = btnNovoClick
   end
   object btnCancelar: TButton
-    Left = 245
+    Left = 247
     Top = 119
     Width = 75
     Height = 25
     Caption = 'Cancelar'
-    TabOrder = 9
+    TabOrder = 5
     OnClick = btnCancelarClick
   end
   object btnAlterar: TButton
@@ -176,7 +186,7 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
     Width = 75
     Height = 25
     Caption = 'Alterar'
-    TabOrder = 10
+    TabOrder = 4
     OnClick = btnAlterarClick
   end
   object DS_TITULOS: TDataSource
@@ -224,8 +234,8 @@ object frmCadastroTimeFutebol: TfrmCadastroTimeFutebol
     end
   end
   object MainMenu: TMainMenu
-    Left = 280
-    Top = 48
+    Left = 184
+    Top = 64
     object Cadastro1: TMenuItem
       Caption = 'Cadastro'
       object Campeonatos1: TMenuItem

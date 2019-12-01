@@ -23,12 +23,13 @@ type
     CDSAno: TStringField;
     btnInserir: TButton;
     btnCancelar: TButton;
-    procedure FormCreate(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure btnExcluirClick(Sender: TObject);
     procedure btnInserirClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     variavelSequencial : Integer;
     procedure ModoBotaoInsercao();
@@ -79,6 +80,7 @@ begin
 
     CDS.Post;
     ModoBotaoNaoInsercao;
+    btnInserir.SetFocus;
     CDS.First;
 
     listaCampeonatos.Add(campeonato);
@@ -123,7 +125,50 @@ end;
 
 procedure TfrmCadastroCampeonatos.FormDestroy(Sender: TObject);
 begin
-  FreeAndNil(listaCampeonatos);
+ FreeAndNil(listaCampeonatos);
+end;
+
+procedure TfrmCadastroCampeonatos.FormShow(Sender: TObject);
+var
+i :Integer;
+lcampeonato : TCampeonatos;
+begin
+
+   CDS.Close;
+   CDS.CreateDataSet;
+   if listaCampeonatos.Count=0 then
+   begin
+     for i := 1 to 6 do
+       begin
+         variavelSequencial:= variavelSequencial+1;
+         CDS.Append;
+         CDS.FieldByName('ID').AsInteger:= variavelSequencial;
+         CDS.FieldByName('Nome').AsString:='Brasileiro';
+         CDS.FieldByName('ano').AsInteger:=StrToInt('2009')+i;
+         CDS.Post;
+
+         lcampeonato:= TCampeonatos.Create;
+
+         lcampeonato.id:= CDSID.AsInteger;
+         lcampeonato.nome:= CDSNome.AsString;
+         lcampeonato.ano:= CDS.FieldByName('ano').AsInteger;
+         listaCampeonatos.Add(lcampeonato);
+
+       end;
+   end
+   else
+   begin
+     for i := 0 to listaCampeonatos.Count-1 do
+       begin
+         CDS.Append;
+         CDS.FieldByName('Id').AsInteger:= listaCampeonatos.Items[i].id;
+         CDS.FieldByName('Nome').AsString:= listaCampeonatos.Items[i].nome;
+         CDS.FieldByName('ano').AsInteger:= listaCampeonatos.Items[i].ano;
+         CDS.Post;
+       end;
+   end;
+
+
 end;
 
 procedure TfrmCadastroCampeonatos.ModoBotaoInsercao;
