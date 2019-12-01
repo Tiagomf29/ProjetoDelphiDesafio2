@@ -258,22 +258,24 @@ begin
     begin
      if  MessageDlg('O time que está sendo cadastrado não possui títulos.'+#13+
       'Deseja copiar os títulos de algum time que já foi cadastrado?', mtConfirmation,[mbYes,mbNo],0) = mrYes then
-      frmListaTimes.ShowModal;
+      begin
+        frmListaTimes.ShowModal;
 
-      for i := 0 to ListaTimesCadastrados.Count-1 do
-        begin
-          if ListaTimesCadastrados.Items[i].id = frmListaTimes.CDSID.Value then
-            for ii := 0 to ListaTimesCadastrados.Items[i].titulos.Count-1 do
-            begin
-              CDS_TITULOS.Append;
-              CDS_TITULOS.FieldByName('Id').AsInteger:= ListaTimesCadastrados.Items[i].titulos.Items[ii].id;
-              CDS_TITULOS.FieldByName('nome').AsString:= ListaTimesCadastrados.Items[i].titulos.Items[ii].nome;
-              CDS_TITULOS.FieldByName('ano').AsInteger:= ListaTimesCadastrados.Items[i].titulos.Items[ii].ano;
-              CDS_TITULOS.Post;
-            end;
-        end;
+        for i := 0 to ListaTimesCadastrados.Count-1 do
+          begin
+            if ListaTimesCadastrados.Items[i].id = frmListaTimes.CDSID.Value then
+              for ii := 0 to ListaTimesCadastrados.Items[i].titulos.Count-1 do
+              begin
+                CDS_TITULOS.Append;
+                CDS_TITULOS.FieldByName('Id').AsInteger:= ListaTimesCadastrados.Items[i].titulos.Items[ii].id;
+                CDS_TITULOS.FieldByName('nome').AsString:= ListaTimesCadastrados.Items[i].titulos.Items[ii].nome;
+                CDS_TITULOS.FieldByName('ano').AsInteger:= ListaTimesCadastrados.Items[i].titulos.Items[ii].ano;
+                CDS_TITULOS.Post;
+              end;
+          end;
       end;
     end;
+  end;
 
     CDS_TITULOS.First;
     while not CDS_TITULOS.Eof do
@@ -290,13 +292,8 @@ begin
 
     end;
 
-    for i := 0 to lListaCampeonatos.Count-1 do
-      begin
-        lCampeonato:=TCampeonatos.Create;
-        lCampeonato.copyFromObject(lListaCampeonatos.Items[i]);
-        lTimeFutebol.titulos.Add(lCampeonato);
-      end;
 
+    lTimeFutebol.titulos:= lListaCampeonatos;
 
     if not statusBotaoAlterar then
     begin
